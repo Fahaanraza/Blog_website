@@ -4,6 +4,7 @@ from flask_ckeditor import CKEditor
 from datetime import date
 from functools import wraps
 from flask_wtf import form
+from werkzeug.datastructures import T
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
@@ -235,4 +236,4 @@ def delete_post(post_id):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)
