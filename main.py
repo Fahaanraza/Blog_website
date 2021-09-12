@@ -4,7 +4,6 @@ from flask_ckeditor import CKEditor
 from datetime import date
 from functools import wraps
 from flask_wtf import form
-from werkzeug.datastructures import T
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
@@ -98,12 +97,6 @@ class Comments(db.Model):
 
 
 
-@app.route('/')
-def get_all_posts():
-    posts = BlogPost.query.all()
-    return render_template("index.html", all_posts=posts,current_user=current_user,logged_in=current_user.is_authenticated)
-
-
 
 
 
@@ -149,6 +142,12 @@ def logout():
     logout_user()
     return redirect(url_for('get_all_posts'))
 
+
+
+@app.route('/')
+def get_all_posts():
+    posts = BlogPost.query.all()
+    return render_template("index.html", all_posts=posts,current_user=current_user,logged_in=current_user.is_authenticated)
 
 
 @app.route("/post/<int:post_id>",methods=['POST','GET'])
@@ -236,4 +235,4 @@ def delete_post(post_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
