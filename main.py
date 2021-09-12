@@ -100,6 +100,11 @@ class Comments(db.Model):
 
 
 
+@app.route('/')
+def get_all_posts():
+    posts = BlogPost.query.all()
+    return render_template("index.html", all_posts=posts,current_user=current_user,logged_in=current_user.is_authenticated)
+
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -145,11 +150,6 @@ def logout():
     return redirect(url_for('get_all_posts'))
 
 
-
-@app.route('/')
-def get_all_posts():
-    posts = BlogPost.query.all()
-    return render_template("index.html", all_posts=posts,current_user=current_user,logged_in=current_user.is_authenticated)
 
 
 @app.route("/post/<int:post_id>",methods=['POST','GET'])
