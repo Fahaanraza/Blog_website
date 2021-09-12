@@ -84,7 +84,7 @@ class BlogPost(db.Model):
     img_url = db.Column(db.String(250), nullable=False)
     coments=db.relationship('Comments',back_populates='parent_post')
 
-# db.create_all()
+db.create_all()
 
 # comment table
 class Comments(db.Model):
